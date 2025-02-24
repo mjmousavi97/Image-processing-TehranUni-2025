@@ -58,12 +58,32 @@ figure;
 imshow(rotated_img);
 title(sprintf('Rotated Image (%.1f degrees)', theta));
 
-%% 
+%% Translation Transformation
+tx = 50;
+ty = 50;
 
+translatedImage = translationFunction(T_img, tx, ty);
+% Display the translated image
+figure;
+imshow(translatedImage);
+title('Translated Image');
 
+%% Shear Transformation
+% Define the shear factors
+Shx = 0.3;  % Shear in X direction
+Shy = 0.2;  % Shear in Y direction
 
+% Define the shear matrix
+T_shear = [1 Shx 0; Shy 1 0; 0 0 1];
 
+% Apply shear using imwarp
+tform_shear = affine2d(T_shear);
+sheared_img = imwarp(T_img, tform_shear);
 
+% Display sheared image
+figure;
+imshow(sheared_img);
+title(sprintf('Sheared Image (Shx=%.1f, Shy=%.1f)', Shx, Shy));
 
 
 
