@@ -4,7 +4,7 @@ function result = logical_and(A, B)
     result = zeros(rows, cols);  
     for x = 1:rows
         for y = 1:cols
-            result(x, y) = A(x, y) & B(x, y);  
+            result(x, y) = A(x, y) * B(x, y);  
         end
     end
 end

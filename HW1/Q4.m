@@ -24,6 +24,7 @@ rect_height2 = 90;
 % Add the rectangle (set the region to 1)
 array2(x_start2:x_start2+rect_height2-1, y_start2:y_start2+rect_length2-1) = 1;
 
+%% NOT
 % Display the arrays to verify the rectangle placement
 figure(1);
 subplot(2,2,1);
@@ -130,11 +131,3 @@ title('Array 2');
 subplot(1,3,3);
 imshow(image_xor);
 title('Array 1 XOR Array 2');
-
-
-
-
-
-
-
-
