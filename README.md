@@ -1,4 +1,5 @@
 # Digital Image Processing – Homework Assignments
+![image](image-processing.png)
 
 ## Description
 This repository contains the homework assignments for the **Digital Image Processing** course, which I am currently taking in the Faculty of Electrical and Computer Engineering at the University of Tehran during Spring 1404 (Spring 2025).
