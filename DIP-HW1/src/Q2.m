@@ -1,18 +1,19 @@
-clc;
-clear;
-close all;
-
-%% Project: Intensity Level Reduction in a Grayscale Image
-%
+% ---------------------------------------------------------------
+% Problem 2 – Intensity Level Reduction in a Grayscale Image
+% --------------------------------------------------------------- 
 % In this project, we process the "skull.tif" image to analyze the effect of reducing intensity levels.
 % The original image has 256 intensity levels (0-255). We display the image at reduced intensity levels 
 % of 64, 16, 4, and 2 while keeping the image size constant.
-
-img_path = 'Images/skull.tif';  
+% ----------------------------------------------------------------
+clc;
+clear;
+close all;
+%% 
+img_path = 'data/Images/skull.tif';  
 skull_img = imread(img_path);
 
 % Display the original image
-figure;
+figure();
 subplot(2, 3, 1);
 imshow(skull_img);
 title('Original Image');
