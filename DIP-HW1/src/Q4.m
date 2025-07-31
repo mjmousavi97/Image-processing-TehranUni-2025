@@ -1,6 +1,18 @@
+% --------------------------------------------------------------- 
+% Problem 4 – implement some important logical operations
+% --------------------------------------------------------------- 
+% This script implements basic logical operations on binary images.
+% Two 200×200 zero matrices are created, and rectangles of ones are added
+% to them at specified locations. Then, logical operations (NOT, AND, OR,
+% AND-NOT, XOR) are applied to these binary images using custom functions,
+% similar to Figure 2.33 in the textbook.
+% --------------------------------------------------------------- 
+
 clc;
 clear;
 close all;
+addpath(genpath('src'));
+
 %% In this section, we want to implement some important logical operations.
 % Create two 200x200 arrays filled with zeros
 array1 = zeros(200, 200);
@@ -51,18 +63,6 @@ title('Not array 2');
 
 image_and = logical_and(array1, array2);
 
-% For array1
-image_and(x_start1,y_start1:y_start1+rect_length1-1) = 1;
-image_and(x_start1+rect_height1-1,y_start1:y_start1+rect_length1-1) = 1;
-image_and(x_start1:x_start1+rect_height1-1, y_start1) = 1;
-image_and(x_start1:x_start1+rect_height1-1, y_start1+rect_length1-1) = 1;
-
-% For array2
-image_and(x_start2,y_start2:y_start2+rect_length2-1) = 1;
-image_and(x_start2+rect_height2-1,y_start2:y_start2+rect_length2-1) = 1;
-image_and(x_start2:x_start2+rect_height2-1, y_start2) = 1;
-image_and(x_start2:x_start2+rect_height2-1, y_start2+rect_length2-1) = 1;
-
 figure(2);
 subplot(1,3,1);
 imshow(array1);
@@ -75,7 +75,6 @@ imshow(image_and);
 title('Array 1 AND Array 2');
 
 %% OR
-
 image_or = logical_or(array1, array2);
 
 figure(3);
@@ -92,7 +91,6 @@ imshow(image_or);
 title('Array 1 OR Array 2');
 
 %% AND-NOT
-
 image_and_not = logical_and_not(array1, array2);
 
 figure(4);
@@ -105,18 +103,10 @@ imshow(array2);
 title('Array 2');
 
 subplot(1,3,3);
-
-% For array2
-image_and_not(x_start2,y_start2:y_start2+rect_length2-1) = 1;
-image_and_not(x_start2+rect_height2-1,y_start2:y_start2+rect_length2-1) = 1;
-image_and_not(x_start2:x_start2+rect_height2-1, y_start2) = 1;
-image_and_not(x_start2:x_start2+rect_height2-1, y_start2+rect_length2-1) = 1;
-
 imshow(image_and_not);
 title('Array 1 AND [NOT Array 2]');
 
 %% XOR
-
 figure(5);
 image_xor = manual_xor(array1, array2);
 
