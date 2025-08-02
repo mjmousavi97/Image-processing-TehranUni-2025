@@ -1,15 +1,38 @@
+% ---------------------------------------------------------------
+% Problem 7 - Bit-plane Manipulation and Blood Vessel Extraction
+% ---------------------------------------------------------------
+% Part a:
+% This part demonstrates bit-plane manipulation on the image 
+% "WashingtonDC.tif" by clearing the sixth bit of each pixel to 
+% analyze information loss.
+% - The original image is loaded and converted to uint8 format.
+% - The sixth bit is cleared using bitwise AND operation.
+% - The original, modified, and absolute difference images are displayed.
+% - Information loss is quantified by computing the mean pixel difference.
+%
+% Part b:
+% This part performs blood vessel extraction from angiography images.
+% - Two images ("angiography_mask.tif" and "angiography_live.tif") are loaded.
+% - The mask image is subtracted from the live image to highlight blood vessels.
+% - The negative of the subtraction result is computed for enhanced visualization.
+% - Original images, subtraction results before and after negating, and 
+%   scaled subtraction images are displayed for comparison.
+%
+% These two parts illustrate fundamental image processing techniques:
+% bit-level manipulation for data analysis, and image subtraction for feature extraction.
+
 clc;
 clear;
 close all;
 %% Part a
 % Load the image
-img = imread('Images/WashingtonDC.tif');
+img = imread('data/images/WashingtonDC.tif');
 whos img
 
 img_bits = uint8(img); % Ensure the image is in uint8 format (0-255)
 img_modified = bitand(img_bits, uint8(255 - 32));
 
-figure;
+figure(1);
 subplot(1,3,1), imshow(img), title('Original Image');
 subplot(1,3,2), imshow(img_modified), title('Modified Image');
 
@@ -23,8 +46,8 @@ fprintf('Information lost (mean pixel difference): %f\n', info_loss);
 
 %% Part b
 % Step 1: Load the images
-mask_image = imread('Images/angiography_mask.tif');
-live_image = imread('Images/angiography_live.tif');
+mask_image = imread('data/images/angiography_mask.tif');
+live_image = imread('data/images/angiography_live.tif');
 
 % Step 2: Perform subtraction (highlight the blood vessels)
 blood_vessels = double(live_image) - double(mask_image);  % Convert to double for subtraction
@@ -33,7 +56,7 @@ blood_vessels = double(live_image) - double(mask_image);  % Convert to double fo
 blood_vessels_negative = 255 - uint8(blood_vessels);  % Make sure it's in the 0-255 range
 
 % Step 4: Display the original images and the results
-figure;
+figure(2);
 
 % Display the original mask image
 subplot(1, 5, 1);
