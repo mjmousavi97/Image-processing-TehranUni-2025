@@ -28,10 +28,13 @@ All implementations emphasize educational clarity over code optimization. In mos
 
 ## ✅ Homework Status
 
+
 | Homework | Status   | Description |
 |----------|----------|-------------|
 | **DIP-HW1**  | ✅ Completed | Basic image I/O, grayscale conversion, data type casting, image resizing, scan-line plotting, intensity quantization, custom affine transforms, binary image logic, local averaging filters, image interpolation comparison, bit-plane slicing, and medical image subtraction. Skills gained include: <br>➤ Reading/writing image data <br>➤ Custom matrix transformations <br>➤ Visualization and plotting <br>➤ Logical operations <br>➤ Noise reduction techniques <br>➤ Working with medical masks and subtraction methods. |
-| **DIP-HW2**  | ⏳ Pending | *(To be added after completion)* |
+| **DIP-HW2**  | ✅ Completed | Hemisphere intensity modeling, projection image generation, pixel intensity calibration, watermark enhancement, noise reduction via box & Gaussian filters, MSE-based filter optimization, separable kernel implementation, and multi-modal QC with ultrasonic data. Skills gained include: <br>➤ Surface integral calculation for mean intensity <br>➤ Image generation from analytical models <br>➤ Illumination correction & gamma adjustment <br>➤ Histogram equalization <br>➤ MSE computation and optimization of smoothing filters <br>➤ Runtime comparison of 2D vs. separable filtering <br>➤ Integration of visual and ultrasonic modalities for defect detection <br>➤ High-pass, high-boost, and edge detection filtering techniques. |
+
+| **DIP-HW3**  | ⏳ Pending | *(To be added after completion)* |
 
 
 
