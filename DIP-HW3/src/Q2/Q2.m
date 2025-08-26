@@ -1,3 +1,13 @@
+%% Fourier Transform Analysis of Images
+% This script explores the Fourier properties of 'woman.tif' and 'parrot.tif'.
+% Main tasks:
+% 1. Compute 2D DFT, magnitude, and phase for both images and visualize them.
+% 2. Compute phase using atan2 and compare with fft2 results.
+% 3. Reconstruct 'woman.tif' using different combinations of magnitude and phase to identify key components.
+% 4. Scale 'parrot.tif' by 1.5x, apply zero-padding, and analyze the effect on the Fourier domain.
+% 5. Shift the image in X, Y, and XY directions and study the impact on DFT.
+% 6. Replace lower-half frequency components of 'woman.tif' with those of 'parrot.tif' and visualize the result.
+% ________________________________________________________________________________________________________________________
 clc;
 clear;
 close all;
@@ -5,8 +15,8 @@ close all;
 % Part a
 
 % Load the images "woman.tif" and "parrot.tif"
-woman_path = 'images/q2/woman.tif';
-parrot_path = 'images/q2/parrot.tif';
+woman_path = 'data/images/q2/woman.tif';
+parrot_path = 'data/images/q2/parrot.tif';
 
 pic_woman = imread(woman_path);
 pic_parrot = imread(parrot_path);
@@ -19,25 +29,25 @@ fft_pic_woman = fft2(pic_woman);
 fft_pic_parrot = fft2(pic_parrot);
 
 % Shift zero-frequency component to the cente
-fft_pic_woman=fftshift(fft_pic_woman);
-fft_pic_parrot=fftshift(fft_pic_parrot);
+fft_woman_shift=fftshift(fft_pic_woman);
+fft_parrot_shift=fftshift(fft_pic_parrot);
 
 % Obtain the magnitude (frequency spectrum) and phase angle of the DFTs
-mag_woman = abs(fft_pic_woman);
-phase_woman = angle(fft_pic_woman);
+mag_woman = abs(fft_woman_shift);
+phase_woman = angle(fft_woman_shift);
 
-mag_parrot = abs(fft_pic_parrot);
-phase_parrot = angle(fft_pic_parrot);
+mag_parrot = abs(fft_parrot_shift);
+phase_parrot = angle(fft_parrot_shift);
 
 % Plot the results of each image
 figure(1);
 subplot(1,3,1), imshow(pic_woman, []), title 'Original pic'
-subplot(1,3,2), imshow(log(double(mag_woman)), []), title 'Magnitude'
+subplot(1,3,2), imshow(log(1 + mag_woman), []), title 'Magnitude'
 subplot(1,3,3), imshow(phase_woman, []), title 'Phase'
 
 figure(2);
 subplot(1,3,1), imshow(pic_parrot,[]), title 'original pic'
-subplot(1,3,2), imshow(log(double(mag_parrot)),[]), title 'Magnitude'
+subplot(1,3,2), imshow(log(1 + mag_parrot),[]), title 'Magnitude'
 subplot(1,3,3), imshow(phase_parrot,[]), title 'Phase'
 
 %% Part b
@@ -56,6 +66,8 @@ subplot(1,3,2), imshow(phi_builtin), title('Matlab Built-in Phase Angle')
 % compare the two phase angle
 difference = abs(phi - phi_builtin);
 subplot(1,3,3), imshow(difference, []), title('Difference Between Computed and Built-in Phase Angle')
+mean_dif_parrot = mean(difference(:));
+disp(['Mean absolute difference between the two methods: ', num2str(mean_dif_parrot)]);
 
 %% Part c
 % Compute the Fourier Transforms
@@ -93,6 +105,7 @@ padded_phase_woman = angle(F_padded_woman);
 
 % (a) Reconstruction using only the phase angle of the woman image
 reconstructed_phase_only = ifft2(exp(1i * phase_woman));
+% reconstructed_phase_only = ifft2(padded_phase_woman);
 
 % (b) Reconstruction using frequency spectrum + phase of parrot
 reconstructed_parrot_magnitude_phase = ifft2(magnitude_parrot .* exp(1i * phase_parrot));
@@ -107,15 +120,15 @@ imshow(pic_woman, []);
 title('Original Woman Image');
 
 subplot(2,2,2);
-imshow(abs(reconstructed_phase_only), []);
+imshow(real(reconstructed_phase_only), []);
 title('Reconstructed Using Only Phase Angle of pic_woman');
 
 subplot(2,2,3);
-imshow(abs(reconstructed_parrot_magnitude_phase), []);
+imshow(real(reconstructed_parrot_magnitude_phase), []);
 title('Reconstructed Using Parrot Magnitude & Phase');
 
 subplot(2,2,4);
-imshow(abs(reconstructed_parrot_magnitude_woman_phase), []);
+imshow(real(reconstructed_parrot_magnitude_woman_phase), []);
 title('Reconstructed Using Parrot Magnitude & Woman Phase');
 
 %% Part d
@@ -165,6 +178,10 @@ title('Fourier Magnitude - Zero-Padded Original');
 subplot(2,2,4);
 imshow(magnitude_scaled, []);
 title('Fourier Magnitude - Scaled Image (1.5x)');
+
+% Scaling an image affects its Fourier spectrum: enlarging concentrates energy near low frequencies,
+% while shrinking spreads energy toward higher frequencies.
+
 
 %% Part e
 % Shift parameters (5% of size)
