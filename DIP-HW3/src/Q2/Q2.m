@@ -56,6 +56,7 @@ I_parrot = imag(fft_pic_parrot);
 
 phi = atan2(I_parrot, R_parrot);
 phi_builtin = angle(fft_pic_parrot);
+
 % Display the phase angle 
 figure(3);
 subplot(1,3,1), imshow(phi, []), title('Computed Phase Angle')

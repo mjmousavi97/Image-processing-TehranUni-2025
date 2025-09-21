@@ -9,6 +9,7 @@ function [filtered_image, filter_response] = filter_function(image, filter_type,
     [rows, cols] = size(image);
     u = -floor(rows/2):floor(rows/2)-1;
     v = -floor(cols/2):floor(cols/2)-1;
+    
     [U, V] = meshgrid(v, u);
     D = sqrt(U.^2 + V.^2); % Distance from the center
 

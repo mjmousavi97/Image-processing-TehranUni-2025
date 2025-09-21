@@ -1,5 +1,30 @@
+% ---------------------------------------------------------------
+% Problem 3 – Frequency Domain Filtering: LPF & HPF Analysis
+% ---------------------------------------------------------------
+% This script applies different frequency domain filters (Ideal, 
+% Butterworth, Gaussian) to an input image and visualizes both 
+% the filtered results and their frequency responses.
+%
+% Steps:
+% 1. Load the input image 'char.tif'.
+% 2. Define cutoff frequencies (D0) and Butterworth order (n).
+% 3. For each filter type:
+%    - Apply Low-Pass Filter (LPF) using filter_function.
+%    - Apply High-Pass Filter (HPF) using filter_function.
+% 4. Display the filtered images in separate figures for LPF 
+%    and HPF results.
+% 5. Display the corresponding frequency responses to compare 
+%    how each filter and cutoff frequency affects the image 
+%    spectrum.
+% ---------------------------------------------------------------
+clc;
+clear;
+close all;
+%%
+addpath(fullfile(pwd, 'src', 'utils'));
+
 % Read the image
-image_path = 'images/q3/char.tif';
+image_path = 'data/images/q3/char.tif';
 char_img = imread(image_path);
 
 % Define cutoff frequencies
