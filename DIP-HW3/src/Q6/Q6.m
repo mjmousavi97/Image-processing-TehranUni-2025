@@ -1,12 +1,32 @@
+% ---------------------------------------------------------------
+% Problem 6 – Laplacian Filtering in Spatial and Frequency Domains
+% ---------------------------------------------------------------
+% This script applies Laplacian edge detection to a grayscale image
+% and analyzes the filter in both spatial and frequency domains.
+%
+% Steps:
+% 1. Load the input image 'bld.tif' and convert to grayscale.
+% 2. Define the Laplacian kernel.
+% 3. Apply the Laplacian filter using convolution in the spatial domain.
+% 4. Compute the 2D Fourier Transform of the Laplacian kernel.
+% 5. Shift and visualize the frequency spectrum of the kernel.
+% 6. Zero-pad the kernel and apply frequency-domain filtering by
+%    multiplying with the Fourier Transform of the image.
+% 7. Perform inverse Fourier Transform to reconstruct the filtered
+%    image in the spatial domain.
+% 8. Compare spatial-domain and frequency-domain filtered images.
+% ---------------------------------------------------------------
+
 clc;
 clear;
 close all;
 %% Part a
 % Load the image
-img = imread('images/q6/bld.tif');
+img = imread('data/images/q6/bld.tif');
 if size(img, 3) == 3  % Convert only if the image is RGB
     img = rgb2gray(img);
 end
+disp(size(img));
 
 % Define the Laplacian kernel
 laplacian_kernel = [-1 -1 -1; -1 8 -1; -1 -1 -1];
@@ -40,7 +60,7 @@ xlabel('Frequency (u)');
 ylabel('Frequency (v)');
 
 %% Part c
-pad_mask = padarray(laplacian_kernel,[597 597],'post');
+pad_mask = padarray(laplacian_kernel,[597 597], 'post');
 mask_fft=fftshift(fft2(pad_mask));
 img_fft=fftshift(fft2(img));
 
